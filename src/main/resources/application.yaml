@@ -1,3 +1,22 @@
+server:
+  port: 15000
+
 spring:
   application:
     name: HwanE-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: api-service
+          uri: http://localhost:15100
+          predicates:
+            - Path=/api/**
+          filters:
+            - StripPrefix=1
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+
+
